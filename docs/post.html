@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="index,follow" />
+    
+<!-- Kurzbeschreibung des HTML5 Blog Beitrag -->
+    <meta name="description" content="Optimierung eines minimalen Bootstrap Tamplate zum induviduellen Blog">
+    
+<!-- Autorangabe ist kein muss macht jedoch bei einer Beitragsseite Sinn  -->
+    <meta name="author" content="Daniel Bieli">
+    
+<!-- Beitragstitel ist Titel der Webseite -->
+    <title>HTML5 Blog Beitrag</title>
+    
+<!-- Zusammenfassen -->
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Theme CSS -->
+    <link href="css/clean-blog.min.css" rel="stylesheet">
+        
+<!-- Minimiren!-->
+    <!-- Webfonts und Icon Fonts komplett Ladung bei minimalem gebrauch! Muss Weg! -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+<!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="index.html">Start Bootstrap</a>
+            </div>
+
+<!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="about.html">About</a>
+                    </li>
+                    <li>
+                        <a href="post.html">Sample Post</a>
+                    </li>
+                    <li>
+                        <a href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+<!-- /.navbar-collapse -->
+        </div>
+<!-- /.container -->
+    </nav>
+
+<!-- Page Header -->
+<!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('img/post-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1>How To Minify CSS, JS, and HTML</h1>                     
+                        <span class="meta">Geschrieben von <a href="https://danielbieli.tk" target="_blank" rel="nofollow">Daniel Bieli</a>2018-04-12</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+<!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+				
+				
+			
+				<h1>How To Minify CSS, JS, and HTML</h1> <ul class="entry-meta clearfix"> <li class="date"> <strong>Updated: </strong> <time datetime="2016-07-20">July 20, 2016</time> </li> </ul> </div> <div class="entry-content clearfix"> <p><a href="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/minify-css.png" rel="attachment wp-att-5774"><img class="aligncenter wp-image-5774 size-full" src="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/minify-css.png" alt=" minify css" srcset="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/minify-css.png 2048w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/minify-css-300x150.png 300w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/minify-css-768x384.png 768w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/minify-css-1024x512.png 1024w" sizes="(max-width: 2048px) 100vw, 2048px" height="1024" width="2048"></a></p> <h2>What Is CSS, JS, and HTML&nbsp;Minification?</h2> <p>To minify CSS, JS, and HTML&nbsp;involves removing any unnecessary characters from within a file to help <strong>reduce its size and thus make it load faster</strong>. Examples of what is removed during file minification includes:</p> <ul> <li>Whitespace characters</li> <li>Comments</li> <li>Line breaks</li> <li>Block delimiters</li> </ul> <p>Most times, the minification process does&nbsp;not affect the function of the file but rather simply optimizes it for downloading purposes. Minifying the CSS, JS, and HTML files in your production environment is especially useful. File changes are often time not made directly in production thus avoiding the need for visually appealing code. Additionally, since Google takes speed into consideration when ranking, minification helps speed up your website making both Google and your site visitors happy.</p> <p>In order to distinguish minified files from unminified files,&nbsp;a&nbsp;<em>.min</em>&nbsp;is often times included within the file name (e.g. <code>foobar.min.css</code>).</p> <h2>Difference Between Minification and Compression</h2> <p>File minification and file compression are not the same thing. Although both aim to achieve the same goal (faster load time) they are both different in how they work. Compression is used to reduce&nbsp;file size by using a compression scheme such as <a href="https://en.wikipedia.org/wiki/Gzip">gzip</a> or <a href="https://www.keycdn.com/support/brotli-compression/">brotli</a>. Files are compressed before they are sent from the server to the client therefore the&nbsp;compression process is carried out as follow:</p> <ol class="kblist"> <li>Files are compressed via a compression method</li> <li>A request is made for the compressed version of a file</li> <li>The compressed file is sent from the server to the client</li> <li>The client uncompresses the file and is able to read&nbsp;the information</li> </ol> <p>Supported compression methods can <strong>vary by server as well as web browsers</strong>. When a browser makes a request to the server it tells the server which compression method it supports so that the server is able to optimize the response for that browser. If the browser does not support any compression method then the server will simply respond with uncompresses data.</p> <p>Read more about the implications of compressed data for modern vs old browsers in our <a href="https://www.keycdn.com/support/vary-header/">Vary Header</a> article.</p> <h2>Minification Example</h2> <p>The following&nbsp;example shows&nbsp;how a CSS file&nbsp;looks before and after minification.</p> <p><strong>Before CSS minification</strong></p> <pre>.entry-content p {
+font-size: 14px !important;
+}
+
+.entry-content ul li {
+font-size: 14px !important;
+}
+
+.product_item p a {
+ color: #000;
+ padding: 10px 0px 0px 0;
+ margin-bottom: 5px;
+ border-bottom: none;
+}</pre> <p><strong>After CSS minification</strong></p> <pre>.entry-content p,.entry-content ul li{font-size:14px!important}.product_item p a{color:#000;padding:10px 0 0;margin-bottom:5px;border-bottom:none}</pre> <p>As can be seen by the example above, after minification the CSS is harder to read as there is there are no line breaks, whitespace, etc. However, this optimized format <strong>requires less bytes thus making it&nbsp;to download</strong>.</p> <h2>How to Minify Your Files?</h2> <p>There are a myriad of tools available for performing CSS, JS, and HTML minification. The following section outlines a few tools available for minifying each file type.</p> <h3>Minify CSS</h3> <p>To minify CSS you have a few options to choose from.</p> <h4>Online-Based</h4> <ul> <li><a href="http://csscompressor.com/">csscompressor.com</a>:&nbsp;Csscompressor gives you the option to select the level of minification you would like to perform on the specified CSS code.&nbsp;Depending on the minification level selected, the tool will determine how many bytes you have saved.<a href="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/csscompressor-css-minify.png" rel="attachment wp-att-5777"><img class="aligncenter wp-image-5777 size-full" src="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/csscompressor-css-minify.png" alt="csscompressor-css-minify" srcset="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/csscompressor-css-minify.png 1557w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/csscompressor-css-minify-300x218.png 300w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/csscompressor-css-minify-768x559.png 768w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/csscompressor-css-minify-1024x745.png 1024w" sizes="(max-width: 1557px) 100vw, 1557px" height="1133" width="1557"></a></li> <li><a href="https://cssminifier.com/">cssminifier.com</a>: This tool is quite straightforward in that you simply paste in your existing CSS and the minified version is created. You then have the option to copy the minified code or alternatively you have the option to&nbsp;download it as a file.&nbsp;<a href="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/css-minifier.png" rel="attachment wp-att-5801"><img class="img-shadow aligncenter wp-image-5801 size-full" src="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/css-minifier.png" alt="css-minifier" srcset="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/css-minifier.png 2383w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/css-minifier-300x140.png 300w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/css-minifier-768x358.png 768w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/css-minifier-1024x478.png 1024w" sizes="(max-width: 2383px) 100vw, 2383px" height="1112" width="2383"></a></li> </ul> <h4>Development Tools</h4> <ul> <li><a href="http://yui.github.io/yuicompressor/">yui.github.io</a>:&nbsp;The YUI Compressor provides you with the ability to create a build process in your development environment which minifies, renames, and saves the optimized file to a production directory.</li> <li><a href="http://www.phpied.com/cssmin-js/">phpied.com</a>:&nbsp;&nbsp;Phpied’s cssmin.js tool&nbsp;takes&nbsp;advantage of&nbsp;YUI Compressor’s CSS minification&nbsp;capability, however uses JavaScript instead of Java.</li> </ul> <h3>Minify JS</h3> <p>To minify JS files there are also a few options available both as online-based and development tools.</p> <h4>Online-Based</h4> <ul> <li><a href="http://closure-compiler.appspot.com/home">closure-compiler.appspot.com</a>: Google’s Closure Compiler can be used as both an online tool as well as an <a href="https://developers.google.com/closure/compiler/docs/gettingstarted_api">API</a>. This tool&nbsp;allows you to also select optimization and formatting preferences.&nbsp;<a href="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/closure-compiler.png" rel="attachment wp-att-5804"><img class="img-shadow aligncenter wp-image-5804 size-full" src="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/closure-compiler.png" alt="closure-compiler" srcset="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/closure-compiler.png 2880w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/closure-compiler-300x102.png 300w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/closure-compiler-768x261.png 768w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/closure-compiler-1024x347.png 1024w" sizes="(max-width: 2880px) 100vw, 2880px" height="977" width="2880"></a></li> <li><a href="http://jscompress.com/">jscompress.com</a>:&nbsp;The online-based Jscompress tool allows you to minify JS by copy / pasting it directly into the compression tool. Additional you also have the ability to upload a JavaScript file and run the minification process on one or multiple files at once.&nbsp;<a href="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/js-compress.png" rel="attachment wp-att-5802"><img class="aligncenter wp-image-5802 size-full" src="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/js-compress.png" alt=" js-compress" srcset="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/js-compress.png 2497w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/js-compress-300x123.png 300w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/js-compress-768x315.png 768w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/js-compress-1024x420.png 1024w" sizes="(max-width: 2497px) 100vw, 2497px" height="1023" width="2497"></a></li> <li><a href="http://javascript-minifier.com/">javascript-minifier.com</a>: Made from the same creators as cssminifier, this JS&nbsp;minifier offers the same functionality to simply copy the minified output or download it as a file.&nbsp;<a href="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/minify-javascript.png" rel="attachment wp-att-5803"><img class="img-shadow aligncenter wp-image-5803 size-full" src="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/minify-javascript.png" alt="minify-javascript" srcset="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/minify-javascript.png 2330w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/minify-javascript-300x152.png 300w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/minify-javascript-768x388.png 768w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/minify-javascript-1024x517.png 1024w" sizes="(max-width: 2330px) 100vw, 2330px" height="1177" width="2330"></a></li> </ul> <h4>Development Tools</h4> <ul> <li><a href="http://yui.github.io/yuicompressor/">yui.github.io</a>:&nbsp;As previously mentioned as a CSS minification tool, the YUI Compressor also provides the ability to minify JS&nbsp;files and conveniently make them ready for production.</li> </ul> <h3>Minify HTML</h3> <p>The following resources for HTML minification&nbsp;are both online-based tools.</p> <ul> <li><a href="https://htmlcompressor.com/compressor/">htmlcompressor.com</a>: This HTML minifcation tools offers multiple&nbsp;options including the ability to select between various&nbsp;levels of minification as well as inline CSS and JS options.&nbsp;<a href="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/html-compressor.png" rel="attachment wp-att-5808"><img class="aligncenter wp-image-5808 size-full" src="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/html-compressor.png" alt=" html-compressor" srcset="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/html-compressor.png 2880w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/html-compressor-300x136.png 300w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/html-compressor-768x349.png 768w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/html-compressor-1024x465.png 1024w" sizes="(max-width: 2880px) 100vw, 2880px" height="1307" width="2880"></a></li> <li><a href="http://minifycode.com/html-minifier/">minifycode.com</a>: The minify code tool for HTML does not have any configuration options and is simply a&nbsp;text box where you can paste in your HTML and generated a minified version.&nbsp;<a href="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/minify-html.png" rel="attachment wp-att-5809"><img class="aligncenter wp-image-5809 size-full" src="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/minify-html.png" alt=" minify-html" srcset="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/minify-html.png 1951w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/minify-html-300x151.png 300w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/minify-html-768x386.png 768w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/minify-html-1024x515.png 1024w" sizes="(max-width: 1951px) 100vw, 1951px" height="981" width="1951"></a></li> </ul> <p>There is an array of tools available to minify your files. Some tools focus on a single file type such as CSS or JavaScript while others are capable of performing minification on various file types. However, online-based and development tools are not the only options available for minification. Many CMS’s also offer <strong>plugins and extensions to minify&nbsp;CSS, JS, and HTML files</strong>.</p> <h2>WordPress Minification Plugins</h2> <p>There are several WordPress plugins which offer a minification option to help further optimize your WordPress website, examples include:</p> <ul> <li><a href="https://wordpress.org/plugins/bwp-minify/">Better WordPress Minify</a></li> <li><a href="https://wordpress.org/plugins/autoptimize/">Autoptimize</a></li> </ul> <p>Many caching plugins&nbsp;also offer the ability to enable&nbsp;cache minification. For example, <a href="https://wordpress.org/support/plugin/cache-enabler">Cache Enabler</a>&nbsp;comes with the option to enable minification for HTML or HTML and JS. Using this feature can help further improve your web page load times, however in certain cases it may cause a conflict with another plugin. Therefore&nbsp;after enabling any minification options via&nbsp;any plugin, you should test your site to ensure there are no conflicts.</p> <h2>Drupal&nbsp;Minification&nbsp;Module</h2> <p>A popular option in the Drupal community for minification is the <a href="https://www.drupal.org/project/minify">Minify module</a>. This module allows you to minify HTML and JavaScript files and relies on the Google Closure Compiler to perform minification. Configuration of this module is quick and requires just a few steps before your files are minified.</p> <h2>Joomla! Minification&nbsp;Extension</h2> <p>The Joomla! CMS also offers a site optimization extension, called <a href="http://extensions.joomla.org/extension/jch-optimize">JCH Optimize</a>, which provides the ability to minify CSS and JavaScript files. This extension aims to aggregate&nbsp;your CSS and JavaScript files and also comes with the ability to enable gzip compression for the aggregated files.</p> <h2>Benefits of Minifying Your Files</h2> <p>In summary, the decision to minify CSS, JS, and HTML files provides advantages&nbsp;for both the <strong>website visitors as well as the site owner</strong>. By minifying your files you will benefit by reducing the amount of data transfer required,&nbsp;files will run more quickly in the client’s browser, and compression results are enhanced. Taking advantage of minification is a great&nbsp;way to help further optimize your site and is easily achievable with the above mentioned online tools and plugins.</p>
+
+				</div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="list-inline text-center">
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted">Copyright &copy; Your Website 2016</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="js/clean-blog.min.js"></script>
+
+</body>
+
+</html>

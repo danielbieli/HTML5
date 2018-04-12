@@ -83,25 +83,128 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+			<h2 id="isp-config-installer-skript">ISP Config Installer Skript</h2>
 				
-				
+<p>Wie Sie vielleicht wissen, ist ISPConfig eines der besten kostenlosen Open-Source-Hosting-Control-Panels zur Verwaltung von Linux-Hosting-Servern in Single- und Multi-Server-Umgebungen.</p>
+<p>Heute werden Sie sehen, wie Sie diese erstaunliche Systemsteuerung mit ispconfig_setup-Skript bereitstellen und installieren. Dieses Skript ist kostenlos auf GitHub unter <a href="https://github.com/PageSpeed-Ninjas/ispconfig_setup">https://github.com/PageSpeed-Ninjas/ispconfig_setup</a> verfügbar und wird von Servisys mit Hilfe der Community kostenlos entwickelt und gewartet.</p>
+<h2 id="voraussetzungen">Voraussetzungen</h2>
+<p>Für die Verwendung dieses Skripts sind einige Voraussetzungen erforderlich:</p>
+<p>Das Skript funktioniert nur für Debian 7 und Debian 8, und einige Software (wie RoundCube) wird nicht auf Debian 8 installiert, da die Debian-Community nicht mehr unterstützt wird.
+Die Installation funktioniert nur auf einem neuen Installationsserver. Wenn Sie also bereits etwas installiert haben (Apache, MySql oder etwas anderes, das von ISPConfig benötigt wird), funktioniert das Installationsskript möglicherweise nicht oder verursacht seltsame Dinge.</p>
+<h2 id="debian-9-strech-minimal-setup">Debian 9 Strech - Minimal Setup</h2>
+<p>Stellen Sie sicher das Ihre Installation den gleichen Stand aufweist wie die originale Minimal ISO Installation. Gerade wenn Sie ein Virtuellen Server betreiben und Ihr Debian 9 aus einem Template erstellt wurde, müssen Sie prüfen ob Sie folgende Eigenschaften erfüllen:</p>
+<h3 id="inhaltsverzeichnis"><em>Inhaltsverzeichnis:</em></h3>
+<ul>
+<li><a href="#minimal-basis-installation-aktualisiern">1. Minimal Basis Installation aktualisiern</a></li>
+<li><a href="#non-root-user-mit-sudo-privilegien-erstellen">2. Non-Root-User mit sudo Privilegien erstellen</a></li>
+<li><a href="#hostnamen-setzten">3. Hostnamen setzten</a>
+<ul>
+<li><a href="#interner-hostname">3.1. Interner Hostname</a></li>
+<li><a href="#externer-hostname">3.2. Externer Hostname</a></li>
+<li><a href="#kontrolle">3.3. Kontrolle</a></li>
+</ul>
+</li>
+<li><a href="#grundlegende-tools-installieren">4. Grundlegende Tools installieren</a></li>
+<li><a href="#install-skript-starten">5. Install Skript starten</a>
+<ul>
+<li><a href="#standart-modus">5.1. Standart Modus</a></li>
+<li><a href="#experten-modus">5.2. Experten Modus</a></li>
+<li><a href="#kontrolle-des-installskripts">5.3. Kontrolle des Installskripts</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="minimal-basis-installation-aktualisiern">Minimal Basis Installation aktualisiern</h3>
+<pre><code class="language-bash">apt-get update &amp;&amp; apt-get -y upgrade &amp;&amp; apt-get -y dist-upgrade &amp;&amp; apt-get -y autoremove &amp;&amp; apt-get -y autoclean
+echo -e &quot;${green} Installation aktualisiern${NC}\n&quot;
+</code></pre>
+<h3 id="non-root-user-mit-sudo-privilegien-erstellen">Non-Root-User mit sudo Privilegien erstellen</h3>
+<pre><code class="language-bash">adduser isp
+usermod -a -G sudo isp
+# Verhindert direkte SSH Logins von root
+sed -i 's/PermitRootLogin yes/PermitRootLogin without-password/' /etc/ssh/sshd_config
+# Erlaubt SSH Logins via Passwort
+sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
+/etc/init.d/ssh restart
+# Passwort für root setzten - Kann kurz sein, da nur eingeloggte User mit sudo Privilegien zu root werden können.
+passwd root
+</code></pre>
+<h3 id="hostnamen-setzten">Hostnamen setzten</h3>
+<h4 id="interner-hostname">Interner Hostname</h4>
+<pre><code class="language-bash"># nano /etc/hostname
+echo &quot;dev&quot; &gt;&gt; /etc/hostname
+</code></pre>
+<h5 id="inhalt-von-etchostname">Inhalt von <code>/etc/hostname</code>**</h5>
+<p><code>dev</code></p>
+<h4 id="externer-hostname">Externer Hostname</h4>
+<pre><code class="language-bash">nano /etc/hosts
+</code></pre>
+<h5 id="inhalt-von-etchosts">Inhalt von <code>/etc/hosts</code></h5>
+<pre><code class="language-bash">127.0.0.1 localhost.localdomain localhost
+127.0.1.1 localhost.localdomain localhost
+10.0.0.1 dev
+165.227.174.198 dev.ispconf.cf dev
+</code></pre>
+<p>Nun muss ist ein <code>reboot</code> erforderlich. Dannach die Hostnamen mit:</p>
+<h4 id="kontrolle">Kontrolle</h4>
+<pre><code class="language-bash">hostname # = dev.ispconf.cf
+hostname -f # = dev
+</code></pre>
+<h2 id="grundlegende-tools-installieren">Grundlegende Tools installieren</h2>
+<pre><code class="language-bash">apt-get -y install dnsutils zoo unzip bzip2 arj nomarch lzop cabextract locate apt-listchanges libnet-ldap-perl libauthen-sasl-perl libio-string-perl libio-socket-ssl-perl libnet-ident-perl zip libnet-dns-perl libdbd-mysql-perl apt-transport-https software-properties-common lsb-release ca-certificates ssh openssh-server ntp ntpdate debconf-utils binutils sudo lsb-release haveged e2fsprogs curl ssh openssh-server openssl ssl-cert mcrypt nano sudo curl git rsync certbot rkhunter ufw fail2ban binutils
+</code></pre>
+<h2 id="install-skript-starten">Install Skript starten</h2>
+<p>Jetzt ist es an der Zeit, unser ISPConfig Control Panel mit dem Autoinstall Skript zu installieren. Das Skript verfügt über zwei Installationsmodi: den Standardmodus und den Expertenmodus.</p>
+<pre><code class="language-bash">cd /home/isp
+git clone https://github.com/PageSpeed-Ninjas/ispconfig_setup.git
+cd ispconfig_setup
+chmod +x install.sh
+bash install.sh
+</code></pre>
+<p>Die beiden Modi sind ähnlich, der Hauptunterschied besteht darin, dass die ISPConfig-Installation im Standardmodus vollständig unbeaufsichtigt ist. Im Expertenmodus können Sie Ihren ISPConfig für spezielle Umgebungen wie Multiserver-Setup, Mirror oder nur einige zu konfigurierende Dienste konfigurieren.</p>
+<p>In der Standardkonfiguration werden folgende Komponenten installiert:</p>
+<ul>
+<li>Webserver (Apache oder Nginx)</li>
+<li>FTP-Server (mit pureftpd)</li>
+<li>DNS-Server (bind9)</li>
+<li>MySQL-Server als Datenbankserver</li>
+<li>Awstats für statistische Zwecke</li>
+<li>IMAP und POP3 (mit Kurier oder Taubenschlag)</li>
+<li>Webmail (mit RoundCube oder Squirellmail)</li>
+<li>ISPConfig 3</li>
+</ul>
+<p>An diesem Punkt überprüft der Installationsprozess Ihre Distribution, um festzustellen, ob das installierte Betriebssystem mit dem Skript kompatibel ist. In meinem Fall wird Debian 8 Jessie erkannt.</p>
+<p>Wenn es für Sie richtig ist, drücken Sie &quot;y&quot;, und nun werden Sie gefragt, bevor der automatische Installationsprozess gestartet wird. Wenn Sie die Antwort auf eine Frage nicht kennen, wählen Sie den Standard aus, indem Sie einfach die Eingabetaste drücken.</p>
+<ul>
+<li>Sie werden nach dem MySql Passwort gefragt</li>
+<li>Als nächstes mussten Sie zwischen Apache und Nginx wählen</li>
+<li>Als nächstes wirst du nach Xcache gefragt (Kompressionssystem für PHP)</li>
+<li>Als nächstes werden Sie nach PHPMyAdmin Installation gefragt</li>
+<li>Als nächstes mussten Sie zwischen Mailserver Typ Dovecot oder Kurier wählen</li>
+<li>Als nächstes mussten Sie wählen, um die Virendefinition zu aktualisieren (empfehlen, ja zu sagen)</li>
+<li>Als nächstes mussten Sie wählen, ob Sie eine Quota aktivieren oder nicht (empfehlen Sie, ja zu sagen)</li>
+<li>Der letzte Punkt in diesem Kapitel ist die Installation im Standard-Expertenmodus</li>
+</ul>
+<h3 id="standart-modus">Standart Modus</h3>
+<p>Daher wählen wir die Installation im Standardmodus, die schnellste und einfachste Art, ISPConfig in einem einzigen Server-Setup mit allen aktivierten Funktionen zu installieren.</p>
+<p>Für den Fall, dass Sie nicht wissen, was Sie auf eine Frage antworten sollen, drücken Sie einfach Enter, die Standardwerte sind in den meisten Fällen gut.</p>
+<ul>
+<li>Als nächstes müssen Sie wählen, Jailkit zu installieren (Achtung Jailkit als normale Installation, konnte nur jetzt installiert werden)</li>
+<li>Als nächstes müssen Sie wählen, ob DKIM aktiviert werden soll oder nicht (empfohlen, Nein zu sagen, da ISMonfig noch nicht nativ unterstützt wird, Dkim wird Teil der nächsten ISPConfig-Version sein)</li>
+<li>Als nächstes müssen Sie zwischen Roundcube und Squirellmail wählen (Anmerkung: In Debian 8 ist diese Option nicht verfügbar, da es für Debian 8 noch kein RoundCube-Paket gibt und Squirellmail der Standard ist)</li>
+<li>Als nächstes werden Sie nach der SSL-Konfiguration gefragt: Land, Staat, Ort, Organisation, Organisationseinheit</li>
+<li>Jetzt können Sie einen Kaffee trinken und entspannen, warten auf den Installationsvorgang zu beenden.</li>
+</ul>
+<h3 id="expertenmodus">Expertenmodus</h3>
+<p>Der einzige Unterschied zum Standardmodus ist das ISPconfig-Installationsskript, das noch nicht automatisiert ist und manuell ausgeführt werden muss. Wie bereits erwähnt, ist dies für Multiserver-Setups, Einzelserver-Setups, die nur einige Dienste und Cluster-Setups ausführen, erforderlich.</p>
+<p>Für einen detaillierten Installationsvorgang von ISPConfig können Sie auf den folgenden Artikel <a href="https://www.howtoforge.com/tutorial/perfect-server-debian-8-jessie-apache-bind-dovecot-ispconfig-3/3/">https://www.howtoforge.com/tutorial/perfect-server-debian-8-jessie-apache-bind-dovecot-ispconfig-3/3/</a> verweisen.</p>
+<h2 id="kontrolle-des-installskripts">Kontrolle des Installskripts</h2>
+<p>Nachdem alles installiert ist, können Sie mit dem Befehl nach Fehlern oder seltsamen Dingen suchen</p>
+<p><code>cat /var/log/ispconfig_setup.log</code></p>
 			
-				<h1>How To Minify CSS, JS, and HTML</h1> <ul class="entry-meta clearfix"> <li class="date"> <strong>Updated: </strong> <time datetime="2016-07-20">July 20, 2016</time> </li> </ul> </div> <div class="entry-content clearfix"> <p><a href="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/minify-css.png" rel="attachment wp-att-5774"><img class="aligncenter wp-image-5774 size-full" src="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/minify-css.png" alt=" minify css" srcset="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/minify-css.png 2048w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/minify-css-300x150.png 300w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/minify-css-768x384.png 768w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/minify-css-1024x512.png 1024w" sizes="(max-width: 2048px) 100vw, 2048px" height="1024" width="2048"></a></p> <h2>What Is CSS, JS, and HTML&nbsp;Minification?</h2> <p>To minify CSS, JS, and HTML&nbsp;involves removing any unnecessary characters from within a file to help <strong>reduce its size and thus make it load faster</strong>. Examples of what is removed during file minification includes:</p> <ul> <li>Whitespace characters</li> <li>Comments</li> <li>Line breaks</li> <li>Block delimiters</li> </ul> <p>Most times, the minification process does&nbsp;not affect the function of the file but rather simply optimizes it for downloading purposes. Minifying the CSS, JS, and HTML files in your production environment is especially useful. File changes are often time not made directly in production thus avoiding the need for visually appealing code. Additionally, since Google takes speed into consideration when ranking, minification helps speed up your website making both Google and your site visitors happy.</p> <p>In order to distinguish minified files from unminified files,&nbsp;a&nbsp;<em>.min</em>&nbsp;is often times included within the file name (e.g. <code>foobar.min.css</code>).</p> <h2>Difference Between Minification and Compression</h2> <p>File minification and file compression are not the same thing. Although both aim to achieve the same goal (faster load time) they are both different in how they work. Compression is used to reduce&nbsp;file size by using a compression scheme such as <a href="https://en.wikipedia.org/wiki/Gzip">gzip</a> or <a href="https://www.keycdn.com/support/brotli-compression/">brotli</a>. Files are compressed before they are sent from the server to the client therefore the&nbsp;compression process is carried out as follow:</p> <ol class="kblist"> <li>Files are compressed via a compression method</li> <li>A request is made for the compressed version of a file</li> <li>The compressed file is sent from the server to the client</li> <li>The client uncompresses the file and is able to read&nbsp;the information</li> </ol> <p>Supported compression methods can <strong>vary by server as well as web browsers</strong>. When a browser makes a request to the server it tells the server which compression method it supports so that the server is able to optimize the response for that browser. If the browser does not support any compression method then the server will simply respond with uncompresses data.</p> <p>Read more about the implications of compressed data for modern vs old browsers in our <a href="https://www.keycdn.com/support/vary-header/">Vary Header</a> article.</p> <h2>Minification Example</h2> <p>The following&nbsp;example shows&nbsp;how a CSS file&nbsp;looks before and after minification.</p> <p><strong>Before CSS minification</strong></p> <pre>.entry-content p {
-font-size: 14px !important;
-}
-
-.entry-content ul li {
-font-size: 14px !important;
-}
-
-.product_item p a {
- color: #000;
- padding: 10px 0px 0px 0;
- margin-bottom: 5px;
- border-bottom: none;
-}</pre> <p><strong>After CSS minification</strong></p> <pre>.entry-content p,.entry-content ul li{font-size:14px!important}.product_item p a{color:#000;padding:10px 0 0;margin-bottom:5px;border-bottom:none}</pre> <p>As can be seen by the example above, after minification the CSS is harder to read as there is there are no line breaks, whitespace, etc. However, this optimized format <strong>requires less bytes thus making it&nbsp;to download</strong>.</p> <h2>How to Minify Your Files?</h2> <p>There are a myriad of tools available for performing CSS, JS, and HTML minification. The following section outlines a few tools available for minifying each file type.</p> <h3>Minify CSS</h3> <p>To minify CSS you have a few options to choose from.</p> <h4>Online-Based</h4> <ul> <li><a href="http://csscompressor.com/">csscompressor.com</a>:&nbsp;Csscompressor gives you the option to select the level of minification you would like to perform on the specified CSS code.&nbsp;Depending on the minification level selected, the tool will determine how many bytes you have saved.<a href="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/csscompressor-css-minify.png" rel="attachment wp-att-5777"><img class="aligncenter wp-image-5777 size-full" src="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/csscompressor-css-minify.png" alt="csscompressor-css-minify" srcset="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/csscompressor-css-minify.png 1557w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/csscompressor-css-minify-300x218.png 300w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/csscompressor-css-minify-768x559.png 768w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/csscompressor-css-minify-1024x745.png 1024w" sizes="(max-width: 1557px) 100vw, 1557px" height="1133" width="1557"></a></li> <li><a href="https://cssminifier.com/">cssminifier.com</a>: This tool is quite straightforward in that you simply paste in your existing CSS and the minified version is created. You then have the option to copy the minified code or alternatively you have the option to&nbsp;download it as a file.&nbsp;<a href="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/css-minifier.png" rel="attachment wp-att-5801"><img class="img-shadow aligncenter wp-image-5801 size-full" src="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/css-minifier.png" alt="css-minifier" srcset="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/css-minifier.png 2383w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/css-minifier-300x140.png 300w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/css-minifier-768x358.png 768w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/css-minifier-1024x478.png 1024w" sizes="(max-width: 2383px) 100vw, 2383px" height="1112" width="2383"></a></li> </ul> <h4>Development Tools</h4> <ul> <li><a href="http://yui.github.io/yuicompressor/">yui.github.io</a>:&nbsp;The YUI Compressor provides you with the ability to create a build process in your development environment which minifies, renames, and saves the optimized file to a production directory.</li> <li><a href="http://www.phpied.com/cssmin-js/">phpied.com</a>:&nbsp;&nbsp;Phpied’s cssmin.js tool&nbsp;takes&nbsp;advantage of&nbsp;YUI Compressor’s CSS minification&nbsp;capability, however uses JavaScript instead of Java.</li> </ul> <h3>Minify JS</h3> <p>To minify JS files there are also a few options available both as online-based and development tools.</p> <h4>Online-Based</h4> <ul> <li><a href="http://closure-compiler.appspot.com/home">closure-compiler.appspot.com</a>: Google’s Closure Compiler can be used as both an online tool as well as an <a href="https://developers.google.com/closure/compiler/docs/gettingstarted_api">API</a>. This tool&nbsp;allows you to also select optimization and formatting preferences.&nbsp;<a href="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/closure-compiler.png" rel="attachment wp-att-5804"><img class="img-shadow aligncenter wp-image-5804 size-full" src="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/closure-compiler.png" alt="closure-compiler" srcset="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/closure-compiler.png 2880w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/closure-compiler-300x102.png 300w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/closure-compiler-768x261.png 768w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/closure-compiler-1024x347.png 1024w" sizes="(max-width: 2880px) 100vw, 2880px" height="977" width="2880"></a></li> <li><a href="http://jscompress.com/">jscompress.com</a>:&nbsp;The online-based Jscompress tool allows you to minify JS by copy / pasting it directly into the compression tool. Additional you also have the ability to upload a JavaScript file and run the minification process on one or multiple files at once.&nbsp;<a href="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/js-compress.png" rel="attachment wp-att-5802"><img class="aligncenter wp-image-5802 size-full" src="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/js-compress.png" alt=" js-compress" srcset="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/js-compress.png 2497w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/js-compress-300x123.png 300w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/js-compress-768x315.png 768w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/js-compress-1024x420.png 1024w" sizes="(max-width: 2497px) 100vw, 2497px" height="1023" width="2497"></a></li> <li><a href="http://javascript-minifier.com/">javascript-minifier.com</a>: Made from the same creators as cssminifier, this JS&nbsp;minifier offers the same functionality to simply copy the minified output or download it as a file.&nbsp;<a href="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/minify-javascript.png" rel="attachment wp-att-5803"><img class="img-shadow aligncenter wp-image-5803 size-full" src="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/minify-javascript.png" alt="minify-javascript" srcset="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/minify-javascript.png 2330w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/minify-javascript-300x152.png 300w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/minify-javascript-768x388.png 768w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/minify-javascript-1024x517.png 1024w" sizes="(max-width: 2330px) 100vw, 2330px" height="1177" width="2330"></a></li> </ul> <h4>Development Tools</h4> <ul> <li><a href="http://yui.github.io/yuicompressor/">yui.github.io</a>:&nbsp;As previously mentioned as a CSS minification tool, the YUI Compressor also provides the ability to minify JS&nbsp;files and conveniently make them ready for production.</li> </ul> <h3>Minify HTML</h3> <p>The following resources for HTML minification&nbsp;are both online-based tools.</p> <ul> <li><a href="https://htmlcompressor.com/compressor/">htmlcompressor.com</a>: This HTML minifcation tools offers multiple&nbsp;options including the ability to select between various&nbsp;levels of minification as well as inline CSS and JS options.&nbsp;<a href="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/html-compressor.png" rel="attachment wp-att-5808"><img class="aligncenter wp-image-5808 size-full" src="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/html-compressor.png" alt=" html-compressor" srcset="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/html-compressor.png 2880w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/html-compressor-300x136.png 300w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/html-compressor-768x349.png 768w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/html-compressor-1024x465.png 1024w" sizes="(max-width: 2880px) 100vw, 2880px" height="1307" width="2880"></a></li> <li><a href="http://minifycode.com/html-minifier/">minifycode.com</a>: The minify code tool for HTML does not have any configuration options and is simply a&nbsp;text box where you can paste in your HTML and generated a minified version.&nbsp;<a href="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/minify-html.png" rel="attachment wp-att-5809"><img class="aligncenter wp-image-5809 size-full" src="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/minify-html.png" alt=" minify-html" srcset="https://cdn.keycdn.com/support/wp-content/uploads/2016/02/minify-html.png 1951w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/minify-html-300x151.png 300w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/minify-html-768x386.png 768w, https://cdn.keycdn.com/support/wp-content/uploads/2016/02/minify-html-1024x515.png 1024w" sizes="(max-width: 1951px) 100vw, 1951px" height="981" width="1951"></a></li> </ul> <p>There is an array of tools available to minify your files. Some tools focus on a single file type such as CSS or JavaScript while others are capable of performing minification on various file types. However, online-based and development tools are not the only options available for minification. Many CMS’s also offer <strong>plugins and extensions to minify&nbsp;CSS, JS, and HTML files</strong>.</p> <h2>WordPress Minification Plugins</h2> <p>There are several WordPress plugins which offer a minification option to help further optimize your WordPress website, examples include:</p> <ul> <li><a href="https://wordpress.org/plugins/bwp-minify/">Better WordPress Minify</a></li> <li><a href="https://wordpress.org/plugins/autoptimize/">Autoptimize</a></li> </ul> <p>Many caching plugins&nbsp;also offer the ability to enable&nbsp;cache minification. For example, <a href="https://wordpress.org/support/plugin/cache-enabler">Cache Enabler</a>&nbsp;comes with the option to enable minification for HTML or HTML and JS. Using this feature can help further improve your web page load times, however in certain cases it may cause a conflict with another plugin. Therefore&nbsp;after enabling any minification options via&nbsp;any plugin, you should test your site to ensure there are no conflicts.</p> <h2>Drupal&nbsp;Minification&nbsp;Module</h2> <p>A popular option in the Drupal community for minification is the <a href="https://www.drupal.org/project/minify">Minify module</a>. This module allows you to minify HTML and JavaScript files and relies on the Google Closure Compiler to perform minification. Configuration of this module is quick and requires just a few steps before your files are minified.</p> <h2>Joomla! Minification&nbsp;Extension</h2> <p>The Joomla! CMS also offers a site optimization extension, called <a href="http://extensions.joomla.org/extension/jch-optimize">JCH Optimize</a>, which provides the ability to minify CSS and JavaScript files. This extension aims to aggregate&nbsp;your CSS and JavaScript files and also comes with the ability to enable gzip compression for the aggregated files.</p> <h2>Benefits of Minifying Your Files</h2> <p>In summary, the decision to minify CSS, JS, and HTML files provides advantages&nbsp;for both the <strong>website visitors as well as the site owner</strong>. By minifying your files you will benefit by reducing the amount of data transfer required,&nbsp;files will run more quickly in the client’s browser, and compression results are enhanced. Taking advantage of minification is a great&nbsp;way to help further optimize your site and is easily achievable with the above mentioned online tools and plugins.</p>
-
-				</div>
+			
+			
+		</div>
             </div>
         </div>
     </article>

@@ -1,0 +1,7 @@
+<script type='text/javascript' src='https://blog.speedword.press/wp-content/themes/cleanblog/js/navigation.js?ver=20150803'></script>
+<script type='text/javascript' src='https://blog.speedword.press/wp-content/themes/cleanblog/js/skip-link-focus-fix.js?ver=20150803'></script>
+<script type='text/javascript' src='https://blog.speedword.press/wp-content/themes/cleanblog/js/jquery.min.js?ver=20150803'></script>
+<script type='text/javascript' src='https://blog.speedword.press/wp-content/themes/cleanblog/js/bootstrap.min.js?ver=20150803'></script>
+<script type='text/javascript' src='https://blog.speedword.press/wp-content/themes/cleanblog/js/clean-blog.min.js?ver=20150803'></script>
+<script type='text/javascript' src='https://blog.speedword.press/wp-includes/js/comment-reply.min.js?ver=4.8.1'></script>
+<script type='text/javascript' src='https://blog.speedword.press/wp-includes/js/wp-embed.min.js?ver=4.8.1'></script>

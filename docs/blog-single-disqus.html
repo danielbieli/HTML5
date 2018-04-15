@@ -13,7 +13,10 @@
         <link href="css/custom.css" rel="stylesheet" type="text/css" media="all" />
         <link href='http://fonts.googleapis.com/css?family=Lato:300,400%7CRaleway:100,400,300,500,600,700%7COpen+Sans:400,500,600' rel='stylesheet' type='text/css'>
     </head>
+	
     <body class="scroll-assist">
+	
+		<!--Nav Start-->
         <div class="nav-container">
             <a id="top"></a>
             <nav>
@@ -654,7 +657,13 @@
                 </div>
             </nav>
         </div>
-        <div class="main-container">
+		<!--Nav Endi-->	
+		
+		<!--Post Content-->
+		<div class="main-container">
+		
+		
+			<!--breadcrumb-->
             <section class="page-title page-title-4 bg-secondary">
                 <div class="container">
                     <div class="row">
@@ -672,57 +681,100 @@
                                 <li class="active">Disqus Post</li>
                             </ol>
                         </div>
-                    </div>
-                    <!--end of row-->
+                    </div>             
                 </div>
-                <!--end of container-->
             </section>
+			<!--breadcrumb-->
+
+			
             <section>
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-10 col-sm-offset-1">
                             <div class="post-snippet mb64">
+							
+								<!--Beitragsbild-->
                                 <img class="mb24" alt="Post Image" src="img/blog-single.jpg" />
+								<!--Beitragsbild-->
+								
+								
+								<!--H1-->
                                 <div class="post-title">
                                     <span class="label">23 Sep</span>
                                     <h4 class="inline-block">A simple image post for starters</h4>
                                 </div>
+								<!--H1-->
+								
+								
+								<!--Post Meta-->
                                 <ul class="post-meta">
                                     <li>
                                         <i class="ti-user"></i>
-                                        <span>Written by
+                                        <span>Autor
                                             <a href="#">Craig Garner</a>
                                         </span>
                                     </li>
                                     <li>
                                         <i class="ti-tag"></i>
-                                        <span>Tagged as
+                                        <span>Tagged als
                                             <a href="#">Lifestyle</a>
                                         </span>
                                     </li>
                                 </ul>
+								<!--Post Meta-->
+								
+								
                                 <hr>
-                                <p class="lead">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                </p>
-                                <p>
-                                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.
-                                </p>
-                                <blockquote>
-                                    It's our challenges and obstacles that give us layers of depth and make us interesting. Are they fun when they happen? No. But they are what make us unique. And that's what I know for sure... I think.
-                                </blockquote>
-                                <p>
-                                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
-                                </p>
-                                <ul class="bullets">
-                                    <li>Beatae vitae dicta sunt explicabo</li>
-                                    <li>Inventore veritatis et quasi architecto</li>
-                                    <li>Sed do eiusmod tempor incididunt</li>
-                                    <li>Accusamus et iusto odio dignissimos ducimus</li>
-                                </ul>
-                            </div>
-                            <!--end of post snippet-->
+							</div>
+						</div><!--end of row-->
+					</div><!--end of container-->
+				</div>
+			</section>																
+								
+			<section>
+			<a id="disqus"></a>
+                <div class="container">
+                    <div class="row mb64">
+                        <div class="col-sm-12 col-md-8 col-md-offset-2">
+                            <h4 class="uppercase">Disqus Comments</h4>
                             <hr>
+                            <p class="lead">
+								Disqus is a service for managing comments on your website. If you are using Foundry as your blog, this means it is now easier than ever to manage comments. Disqus is free and requires you to sign up and add your website. Integrating Disqus with Foundry is a simple process that differs slightly depending on whether you're using Variant or plain HTML. 
+                            </p>
+                            <h5 class="uppercase">Retrieving your site's Shortname:</h5>
+                            <p class="lead">
+								Disqus commments link to your site using your site's 'shortname' this is automatically generated by Disqus based on the information you provided when you added your site to disqus. To access your shortname:
+                            </p>
+                            <ul class="bullets">
+                            	<li>Click the cog in the top-right corner</li>
+                            	<li>Select Admin</li>
+                            	<li>Click 'Settings' in the far right of the grey menu (if you have multiple sites, select the appropriate site)</li>
+                            	<li>Your site's 'shortname' will appear below the 'Site Identity' heading.</li>
+                            </ul>
+                            <h5 class="uppercase">Linking Disqus with Variant</h5>
+                            <p class="lead">
+                            	Select the Disqus comments block in Variant. When you hover over the section you'll see a tag button appear in the top-right corner. Click this and you'll see a modal open, place your site's shortname here.
+                            </p>
+                            
+                            <h5 class="uppercase">Linking Disqus with plain HTML</h5>
+                            <p class="lead">
+								If you're using pure HTML, the Disqus shortname needs to be placed inside the data attribute 'data-shortname' on the disqus-comments div like so:
+                            </p>
+                            <pre>                            
+								&lt;div class="disqus-comments" data-shortname="mysitesname"&gt;
+								&lt;div id="disqus_thread"&gt;&lt;/div&gt;
+								&lt;/div&gt;
+                            </pre>
+                            
+                        </div>
+                    </div><!--end of row-->
+                </div><!--end of container-->
+            </section>
+			
+			<section>
+                    <div>    
+						<div>
+						 <!--end of post snippet-->
                             <div class="disqus-comments" data-shortname="mrarefoundry">
                                 <div id="disqus_thread"></div>
                             </div>
@@ -730,11 +782,14 @@
                         </div>
                         <!--end of nine col-->
                     </div>
-                    <!--end of container row-->
-                </div>
-                <!--end of container-->
-            </section>
-            <footer class="footer-1 bg-dark">
+             <!--end of container-->
+            </section>      
+		
+        </div>                
+		<!--Post Content-->	
+			
+			
+        <footer class="footer-1 bg-dark">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-3 col-sm-6">
@@ -823,8 +878,9 @@
                 <!--end of container-->
                 <a class="btn btn-sm fade-half back-to-top inner-link" href="#top">Top</a>
             </footer>
-        </div>
-        <script src="js/jquery.min.js"></script>
+        
+		
+		<script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/flickr.js"></script>
         <script src="js/flexslider.min.js"></script>
@@ -837,5 +893,7 @@
         <script src="js/smooth-scroll.min.js"></script>
         <script src="js/parallax.js"></script>
         <script src="js/scripts.js"></script>
+		
     </body>
+	
 </html>

@@ -7,7 +7,7 @@
     <meta name="robots" content="index,follow" />
     
 <!-- Kurzbeschreibung des HTML5 Blog Beitrag -->
-    <meta name="description" content="Optimierung eines minimalen Bootstrap Tamplate zum induviduellen Blog">
+    <meta itemprop="description" name="description" content="Optimierung eines minimalen Bootstrap Tamplate zum induviduellen Blog">
     
 <!-- Autorangabe ist kein muss macht jedoch bei einer Beitragsseite Sinn  -->
     <meta name="author" content="Daniel Bieli">
@@ -28,7 +28,7 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 </head>
 
-<body>
+<body <div itemscope itemtype="http://schema.org/BlogPosting">
 <!-- Navigation -->
     <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
         <div class="container-fluid">
@@ -70,21 +70,29 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="post-heading">
-                        <h1>How To Minify CSS, JS, and HTML</h1>                     
-                        <span class="meta">Geschrieben von <a href="https://danielbieli.tk" target="_blank" rel="nofollow">Daniel Bieli</a> am <span>2018-04-12</span></span>
-                    </div>
+                        <h1 itemprop="headline">How To Minify CSS, JS, and HTML</h1>                     
+                        <span class="meta">Geschrieben von
+				<span itemprop="author" itemscope itemtype="http://schema.org/Person">
+   					<span itemprop="name">
+      				  		<a itemprop="url" href="https://danielbieli.tk" target="_blank" rel="nofollow">Daniel Bieli</a>
+					</span>				
+   				</span>			
+				am <meta itemprop="datePublished" content="content="2018-04-30">2018-04-30
+				
+			  </span>
+		    </div>
                 </div>
             </div>
         </div>
     </header>
 
 <!-- Post Content -->
-    <article>
+    <article itemprop="articleBody">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 
-			<h2 id="isp-config-installer-skript">Make the Web Faster</h2>
+			<h2 itemprop="alternativeHeadline" id="isp-config-installer-skript">Make the Web Faster</h2>
 			
 <p>Tools und Informationen, die Ihnen beim Erstellen von Websites mit hoher Leistung helfen.</p>
 				

@@ -70,7 +70,7 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="post-heading">
-                        <h1 itemprop="headline">How To Minify CSS, JS, and HTML</h1>                     
+                        <h1 itemprop="headline">HTML, CSS & JavaScript</h1>                     
                         <span class="meta">Geschrieben von
 				<span itemprop="author" itemscope itemtype="http://schema.org/Person">
    					<span itemprop="name">
@@ -91,127 +91,17 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+			<h2 itemprop="alternativeHeadline" id="php-social-links">PHP Social Links</h2>
+				<pre id='php'>
+				<code>
+					<ul class="social">
+					<li><a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(get_permalink($post->ID)); ?>&amp;t=<?php echo rawurlencode(strip_tags(get_the_title())) ?>" target="blank" rel="nofollow"></a></li>
+					<li><a class="twitter" href="https://twitter.com/intent/tweet?text=<?php echo rawurlencode(strip_tags(get_the_title())) ?>: <?php echo urlencode(get_permalink($post->ID)); ?>" target="blank" rel="nofollow"></a></li>
+		    			<li><a class="google" href="https://plusone.google.com/_/+1/confirm?hl=de&url=<?php echo urlencode(get_permalink($post->ID)); ?>&title=<?php echo rawurlencode(strip_tags(get_the_title())) ?>" target="blank" rel="nofollow"></a></li>
+					</ul>			    	
+				</code>	
+			    	</pre>
 
-			<h2 itemprop="alternativeHeadline" id="isp-config-installer-skript">Make the Web Faster</h2>
-			
-<p>Tools und Informationen, die Ihnen beim Erstellen von Websites mit hoher Leistung helfen.</p>
-				
-<p>Wie Sie vielleicht wissen, ist ISPConfig eines der besten kostenlosen Open-Source-Hosting-Control-Panels zur Verwaltung von Linux-Hosting-Servern in Single- und Multi-Server-Umgebungen.</p>
-<p>Heute werden Sie sehen, wie Sie diese erstaunliche Systemsteuerung mit ispconfig_setup-Skript bereitstellen und installieren. Dieses Skript ist kostenlos auf GitHub unter <a href="https://github.com/PageSpeed-Ninjas/ispconfig_setup">https://github.com/PageSpeed-Ninjas/ispconfig_setup</a> verfügbar und wird von Servisys mit Hilfe der Community kostenlos entwickelt und gewartet.</p>
-<h2 id="voraussetzungen">Voraussetzungen</h2>
-<p>Für die Verwendung dieses Skripts sind einige Voraussetzungen erforderlich:</p>
-<p>Das Skript funktioniert nur für Debian 7 und Debian 8, und einige Software (wie RoundCube) wird nicht auf Debian 8 installiert, da die Debian-Community nicht mehr unterstützt wird.
-Die Installation funktioniert nur auf einem neuen Installationsserver. Wenn Sie also bereits etwas installiert haben (Apache, MySql oder etwas anderes, das von ISPConfig benötigt wird), funktioniert das Installationsskript möglicherweise nicht oder verursacht seltsame Dinge.</p>
-<h2 id="debian-9-strech-minimal-setup">Debian 9 Strech - Minimal Setup</h2>
-<p>Stellen Sie sicher das Ihre Installation den gleichen Stand aufweist wie die originale Minimal ISO Installation. Gerade wenn Sie ein Virtuellen Server betreiben und Ihr Debian 9 aus einem Template erstellt wurde, müssen Sie prüfen ob Sie folgende Eigenschaften erfüllen:</p>
-<h3 id="inhaltsverzeichnis"><em>Inhaltsverzeichnis:</em></h3>
-<ul>
-<li><a href="#minimal-basis-installation-aktualisiern">1. Minimal Basis Installation aktualisiern</a></li>
-<li><a href="#non-root-user-mit-sudo-privilegien-erstellen">2. Non-Root-User mit sudo Privilegien erstellen</a></li>
-<li><a href="#hostnamen-setzten">3. Hostnamen setzten</a>
-<ul>
-<li><a href="#interner-hostname">3.1. Interner Hostname</a></li>
-<li><a href="#externer-hostname">3.2. Externer Hostname</a></li>
-<li><a href="#kontrolle">3.3. Kontrolle</a></li>
-</ul>
-</li>
-<li><a href="#grundlegende-tools-installieren">4. Grundlegende Tools installieren</a></li>
-<li><a href="#install-skript-starten">5. Install Skript starten</a>
-<ul>
-<li><a href="#standart-modus">5.1. Standart Modus</a></li>
-<li><a href="#experten-modus">5.2. Experten Modus</a></li>
-<li><a href="#kontrolle-des-installskripts">5.3. Kontrolle des Installskripts</a></li>
-</ul>
-</li>
-</ul>
-<h3 id="minimal-basis-installation-aktualisiern">Minimal Basis Installation aktualisiern</h3>
-<pre><code class="language-bash">apt-get update &amp;&amp; apt-get -y upgrade &amp;&amp; apt-get -y dist-upgrade &amp;&amp; apt-get -y autoremove &amp;&amp; apt-get -y autoclean
-echo -e &quot;${green} Installation aktualisiern${NC}\n&quot;
-</code></pre>
-<h3 id="non-root-user-mit-sudo-privilegien-erstellen">Non-Root-User mit sudo Privilegien erstellen</h3>
-<pre><code class="language-bash">adduser isp
-usermod -a -G sudo isp
-# Verhindert direkte SSH Logins von root
-sed -i 's/PermitRootLogin yes/PermitRootLogin without-password/' /etc/ssh/sshd_config
-# Erlaubt SSH Logins via Passwort
-sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
-/etc/init.d/ssh restart
-# Passwort für root setzten - Kann kurz sein, da nur eingeloggte User mit sudo Privilegien zu root werden können.
-passwd root
-</code></pre>
-<h3 id="hostnamen-setzten">Hostnamen setzten</h3>
-<h4 id="interner-hostname">Interner Hostname</h4>
-<pre><code class="language-bash"># nano /etc/hostname
-echo &quot;dev&quot; &gt;&gt; /etc/hostname
-</code></pre>
-<h5 id="inhalt-von-etchostname">Inhalt von <code>/etc/hostname</code>**</h5>
-<p><code>dev</code></p>
-<h4 id="externer-hostname">Externer Hostname</h4>
-<pre><code class="language-bash">nano /etc/hosts
-</code></pre>
-<h5 id="inhalt-von-etchosts">Inhalt von <code>/etc/hosts</code></h5>
-<pre><code class="language-bash">127.0.0.1 localhost.localdomain localhost
-127.0.1.1 localhost.localdomain localhost
-10.0.0.1 dev
-165.227.174.198 dev.ispconf.cf dev
-</code></pre>
-<p>Nun muss ist ein <code>reboot</code> erforderlich. Dannach die Hostnamen mit:</p>
-<h4 id="kontrolle">Kontrolle</h4>
-<pre><code class="language-bash">hostname # = dev.ispconf.cf
-hostname -f # = dev
-</code></pre>
-<h2 id="grundlegende-tools-installieren">Grundlegende Tools installieren</h2>
-<pre><code class="language-bash">apt-get -y install dnsutils zoo unzip bzip2 arj nomarch lzop cabextract locate apt-listchanges libnet-ldap-perl libauthen-sasl-perl libio-string-perl libio-socket-ssl-perl libnet-ident-perl zip libnet-dns-perl libdbd-mysql-perl apt-transport-https software-properties-common lsb-release ca-certificates ssh openssh-server ntp ntpdate debconf-utils binutils sudo lsb-release haveged e2fsprogs curl ssh openssh-server openssl ssl-cert mcrypt nano sudo curl git rsync certbot rkhunter ufw fail2ban binutils
-</code></pre>
-<h2 id="install-skript-starten">Install Skript starten</h2>
-<p>Jetzt ist es an der Zeit, unser ISPConfig Control Panel mit dem Autoinstall Skript zu installieren. Das Skript verfügt über zwei Installationsmodi: den Standardmodus und den Expertenmodus.</p>
-<pre><code class="language-bash">cd /home/isp
-git clone https://github.com/PageSpeed-Ninjas/ispconfig_setup.git
-cd ispconfig_setup
-chmod +x install.sh
-bash install.sh
-</code></pre>
-<p>Die beiden Modi sind ähnlich, der Hauptunterschied besteht darin, dass die ISPConfig-Installation im Standardmodus vollständig unbeaufsichtigt ist. Im Expertenmodus können Sie Ihren ISPConfig für spezielle Umgebungen wie Multiserver-Setup, Mirror oder nur einige zu konfigurierende Dienste konfigurieren.</p>
-<p>In der Standardkonfiguration werden folgende Komponenten installiert:</p>
-<ul>
-<li>Webserver (Apache oder Nginx)</li>
-<li>FTP-Server (mit pureftpd)</li>
-<li>DNS-Server (bind9)</li>
-<li>MySQL-Server als Datenbankserver</li>
-<li>Awstats für statistische Zwecke</li>
-<li>IMAP und POP3 (mit Kurier oder Taubenschlag)</li>
-<li>Webmail (mit RoundCube oder Squirellmail)</li>
-<li>ISPConfig 3</li>
-</ul>
-<p>An diesem Punkt überprüft der Installationsprozess Ihre Distribution, um festzustellen, ob das installierte Betriebssystem mit dem Skript kompatibel ist. In meinem Fall wird Debian 8 Jessie erkannt.</p>
-<p>Wenn es für Sie richtig ist, drücken Sie &quot;y&quot;, und nun werden Sie gefragt, bevor der automatische Installationsprozess gestartet wird. Wenn Sie die Antwort auf eine Frage nicht kennen, wählen Sie den Standard aus, indem Sie einfach die Eingabetaste drücken.</p>
-<ul>
-<li>Sie werden nach dem MySql Passwort gefragt</li>
-<li>Als nächstes mussten Sie zwischen Apache und Nginx wählen</li>
-<li>Als nächstes wirst du nach Xcache gefragt (Kompressionssystem für PHP)</li>
-<li>Als nächstes werden Sie nach PHPMyAdmin Installation gefragt</li>
-<li>Als nächstes mussten Sie zwischen Mailserver Typ Dovecot oder Kurier wählen</li>
-<li>Als nächstes mussten Sie wählen, um die Virendefinition zu aktualisieren (empfehlen, ja zu sagen)</li>
-<li>Als nächstes mussten Sie wählen, ob Sie eine Quota aktivieren oder nicht (empfehlen Sie, ja zu sagen)</li>
-<li>Der letzte Punkt in diesem Kapitel ist die Installation im Standard-Expertenmodus</li>
-</ul>
-<h3 id="standart-modus">Standart Modus</h3>
-<p>Daher wählen wir die Installation im Standardmodus, die schnellste und einfachste Art, ISPConfig in einem einzigen Server-Setup mit allen aktivierten Funktionen zu installieren.</p>
-<p>Für den Fall, dass Sie nicht wissen, was Sie auf eine Frage antworten sollen, drücken Sie einfach Enter, die Standardwerte sind in den meisten Fällen gut.</p>
-<ul>
-<li>Als nächstes müssen Sie wählen, Jailkit zu installieren (Achtung Jailkit als normale Installation, konnte nur jetzt installiert werden)</li>
-<li>Als nächstes müssen Sie wählen, ob DKIM aktiviert werden soll oder nicht (empfohlen, Nein zu sagen, da ISMonfig noch nicht nativ unterstützt wird, Dkim wird Teil der nächsten ISPConfig-Version sein)</li>
-<li>Als nächstes müssen Sie zwischen Roundcube und Squirellmail wählen (Anmerkung: In Debian 8 ist diese Option nicht verfügbar, da es für Debian 8 noch kein RoundCube-Paket gibt und Squirellmail der Standard ist)</li>
-<li>Als nächstes werden Sie nach der SSL-Konfiguration gefragt: Land, Staat, Ort, Organisation, Organisationseinheit</li>
-<li>Jetzt können Sie einen Kaffee trinken und entspannen, warten auf den Installationsvorgang zu beenden.</li>
-</ul>
-<h3 id="expertenmodus">Expertenmodus</h3>
-<p>Der einzige Unterschied zum Standardmodus ist das ISPconfig-Installationsskript, das noch nicht automatisiert ist und manuell ausgeführt werden muss. Wie bereits erwähnt, ist dies für Multiserver-Setups, Einzelserver-Setups, die nur einige Dienste und Cluster-Setups ausführen, erforderlich.</p>
-<p>Für einen detaillierten Installationsvorgang von ISPConfig können Sie auf den folgenden Artikel <a href="https://www.howtoforge.com/tutorial/perfect-server-debian-8-jessie-apache-bind-dovecot-ispconfig-3/3/">https://www.howtoforge.com/tutorial/perfect-server-debian-8-jessie-apache-bind-dovecot-ispconfig-3/3/</a> verweisen.</p>
-<h2 id="kontrolle-des-installskripts">Kontrolle des Installskripts</h2>
-<p>Nachdem alles installiert ist, können Sie mit dem Befehl nach Fehlern oder seltsamen Dingen suchen</p>
-<p><code>cat /var/log/ispconfig_setup.log</code></p>
-			
 			
 			
 		</div>

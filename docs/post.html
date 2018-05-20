@@ -91,19 +91,15 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-			<h2 itemprop="alternativeHeadline" id="php-social-links">PHP Social Links</h2>
-				<pre id='php'>
-				<code>
-					<ul class="social">
+			<h2 itemprop="alternativeHeadline" id="php-social-links">PHP Social Links</h2>	
+				<pre>
+					<ul>
 					<li><a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(get_permalink($post->ID)); ?>&amp;t=<?php echo rawurlencode(strip_tags(get_the_title())) ?>" target="blank" rel="nofollow"></a></li>
 					<li><a class="twitter" href="https://twitter.com/intent/tweet?text=<?php echo rawurlencode(strip_tags(get_the_title())) ?>: <?php echo urlencode(get_permalink($post->ID)); ?>" target="blank" rel="nofollow"></a></li>
 		    			<li><a class="google" href="https://plusone.google.com/_/+1/confirm?hl=de&url=<?php echo urlencode(get_permalink($post->ID)); ?>&title=<?php echo rawurlencode(strip_tags(get_the_title())) ?>" target="blank" rel="nofollow"></a></li>
-					</ul>			    	
-				</code>	
-			    	</pre>
-
-			
-			
+					</ul>
+		    		</pre>	
+		
 		</div>
             </div>
         </div>

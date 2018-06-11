@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style> 
+html body {
+	color: #212121;
+	font-family: Roboto,sans-serif;
+	font-size: 16px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 400;
+	line-height: 1.5em;
+}
+
+h1 {
+	color: #212121;
+	font-family: Roboto,sans-serif;
+	font-size: 2em;
+    font-style: normal;
+    font-variant: small-caps;
+	font-weight: 400;
+	line-height: 2.5em;  
+}	
+
+h2 {
+	color: #212121;
+	font-family: Roboto,sans-serif;
+	font-size: 1.375em;
+    font-style: normal;
+    font-variant: small-caps;
+	font-weight: 400;
+	line-height: 2em;  
+}	
+
+h3 {
+	color: #212121;
+	font-family: Roboto,sans-serif;
+	font-size: 1.125em;
+    font-variant: small-caps;
+	font-weight: 400;
+	line-height: 1.875em;
+}
+
+#myHeader {
+    background-color: lightblue;
+    color: black;
+    padding: 40px;
+    text-align: center;
+}
+	
+#share a:hover{
+    opacity:.7;
+    transition:.1s linear
+}
+	
+.facebook{
+    background:#3D5B96 url("img/facebook.png") no-repeat scroll 50% 25% / 20px;
+    color:#fff;
+    padding:1% 16.6666%
+}
+	
+.twitter{
+    background:#00ADE8 url("img/twitter.png") no-repeat scroll 50% 25% / 20px;
+    color:#fff;
+    padding:1% 16.6666%
+}
+	
+.google{
+    background:#DD3F34 url("img/google.png") no-repeat scroll 50% 25% / 20px;
+    color:#fff;
+    padding:1% 16.6666%
+}
+	
+.facebook:hover,.twitter:hover,.google:hover{
+    background-size:30px;
+    padding:50px 16.6666% !important
+}	
+</style>	
+</head>
+	
+<body>
+	<h1 id="myHeader">The box-sizing Property</h1>
+		
+		<p>Width and height only apply to the content of the element. This div has a width of 300px. But the full width is 300px + 20px (left and right border) + 60px (left and right padding) = 380px! Width and height only apply to the content of the element. This div has a width of 300px. But the full width is 300px + 20px (left and right border) + 60px (left and right padding) = 380px! Width and height only apply to the content of the element. This div has a width of 300px. But the full width is 300px + 20px (left and right border) + 60px (left and right padding) = 380px! Width and height only apply to the content of the element. This div has a width of 300px. But the full width is 300px + 20px (left and right border) + 60px (left and right padding) = 380px!</p>
+
+	<h2>Box-sizing: Content-box (default):</h2>
+		
+		<p>Width and height only apply to the content of the element. This div has a width of 300px. But the full width is 300px + 20px (left and right border) + 60px (left and right padding) = 380px! Width and height only apply to the content of the element. This div has a width of 300px. But the full width is 300px + 20px (left and right border) + 60px (left and right padding) = 380px! Width and height only apply to the content of the element. This div has a width of 300px. But the full width is 300px + 20px (left and right border) + 60px (left and right padding) = 380px! Width and height only apply to the content of the element. This div has a width of 300px. But the full width is 300px + 20px (left and right border) + 60px (left and right padding) = 380px!</p><p>Width and height only apply to the content of the element. This div has a width of 300px. But the full width is 300px + 20px (left and right border) + 60px (left and right padding) = 380px! Width and height only apply to the content of the element. This div has a width of 300px. But the full width is 300px + 20px (left and right border) + 60px (left and right padding) = 380px! Width and height only apply to the content of the element. This div has a width of 300px. But the full width is 300px + 20px (left and right border) + 60px (left and right padding) = 380px! Width and height only apply to the content of the element. This div has a width of 300px. But the full width is 300px + 20px (left and right border) + 60px (left and right padding) = 380px!</p>
+
+	<h3>Box-sizing: Border-box:</h3>
+
+		<p>Width and height apply to all parts of the element: content, padding and borders:</p>
+	
+		<div id="example2">Here, the full width is 300px, no matter what!</div>
+	
+		<div id="share" style="width:100%;position:fixed;bottom:-3px">		
+			<a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(get_permalink($post->ID)); ?>&amp;t=<?php echo rawurlencode(strip_tags(get_the_title())) ?>" target="blank" rel="nofollow"></a> 
+			<a class="twitter" href="https://twitter.com/intent/tweet?text=<?php echo rawurlencode(strip_tags(get_the_title())) ?>: <?php echo urlencode(get_permalink($post->ID)); ?>" target="blank" rel="nofollow"></a> 
+			<a class="google" href="https://plusone.google.com/_/+1/confirm?hl=de&amp;url=<?php echo urlencode(get_permalink($post->ID)); ?>&amp;title=<?php echo rawurlencode(strip_tags(get_the_title())) ?>" target="blank" rel="nofollow"></a>
+		</div>
+		
+</body>
+</html>

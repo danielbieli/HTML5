@@ -33,3 +33,20 @@ Inhaltlich gute Seite mit nur externen Links. Wenn `nofollow` im Head angegeben 
 ##### `<meta name="robots" content="noindex, nofollow">`
 
 Eine Login Seite zum Beispiel. Weder soll diese indexiert werden noch soll der Robot unser Crawl Guthaben verschwenden mit nicht öffentlichen Links.
+
+### Skripte
+
+#### JavaScript
+
+**Async**: JS im Head sollte grundsätzlich immer async geladen werden, da es einfach nebem dem DOM Rendering laden ohne zu blockieren.
+Ausnahme: JS Funktion Trigger wird bei async gerendert bevor die JS Funktion geladen wurde.
+
+**Defe**r: JS wird erst als letztes geladem.
+
+```html
+<script src="demo_async.js" async></script>
+<script src="demo_defer.js" defer></script>
+<script src="demo.js"></script>
+```
+
+Fazit: Falls Funktionen schneller aufgerufen als geladen werden sollten Sie den Aufbau Ihrer Seite nochmals überdenken. 

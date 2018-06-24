@@ -1,0 +1,42 @@
+<!doctype HTML>
+<html>
+	<head>
+		<title>CSS link[rel=preload] Polyfill</title>
+		<link rel="preload" href="https://master-origin-loadcss.fgview.com/test/slow.css.php" as="style" onload="this.onload=null;this.rel='stylesheet'">
+		<noscript><link rel="stylesheet" href="https://master-origin-loadcss.fgview.com/test/slow.css.php"></noscript>
+		<script>/*
+ loadCSS. [c]2017 Filament Group, Inc. MIT License */
+(function(a){a.loadCSS||(a.loadCSS=function(){});var c=loadCSS.relpreload={};c.support=function(){try{var b=a.document.createElement("link").relList.supports("preload")}catch(e){b=!1}return function(){return b}}();c.bindMediaToggle=function(b){function a(){b.media=c}var c=b.media||"all";b.addEventListener?b.addEventListener("load",a):b.attachEvent&&b.attachEvent("onload",a);setTimeout(function(){b.rel="stylesheet";b.media="only x"});setTimeout(a,3E3)};c.poly=function(){if(!c.support())for(var b=a.document.getElementsByTagName("link"),
+e=0;e<b.length;e++){var d=b[e];"preload"!==d.rel||"style"!==d.getAttribute("as")||d.getAttribute("data-loadcss")||(d.setAttribute("data-loadcss",!0),c.bindMediaToggle(d))}};if(!c.support()){c.poly();var f=a.setInterval(c.poly,500);a.addEventListener?a.addEventListener("load",function(){c.poly();a.clearInterval(f)}):a.attachEvent&&a.attachEvent("onload",function(){c.poly();a.clearInterval(f)})}"undefined"!==typeof exports?exports.loadCSS=loadCSS:a.loadCSS=loadCSS})("undefined"!==typeof global?global:
+this);</script>
+		<style>
+			/* a few demo styles */
+			body {
+				font-family: sans-serif;
+				margin: 50px auto;
+				max-width: 40em;
+				padding: 0 20px;
+				line-height: 1.5
+			}
+			pre {
+				white-space: normal;
+				background: #fff;
+				padding: 15px;
+				border: 1px solid rgba(0,0,0,.3);
+				color: #333;
+			}
+
+		</style>
+		<script></script><!-- here to ensure a non-blocking load still occurs in IE and Edge, even if scripts follow loadCSS in head -->
+	</head>
+	<body>
+		<p>This is a test page that references a slow-loading stylesheet using the new standard <code>link[rel=preload]</code>.
+			A script is included to enable asynchronous CSS loading in browsers that do not support <code>link[rel=preload]</code>, and to enable the stylesheet immediately when it is loaded or cached.<p>
+
+		<p>That markup looks like this:</p>
+		<pre><code>&lt;link rel="preload" href="slow.css.php" as="style" onload="this.onload=null;this.rel='stylesheet'"&gt;</code></pre>
+
+		<p>Note: The CSS file  has a 5 second delay built into its server response time. If it is loaded in a non-blocking manner as desired, you should be able to read this text before the page is styled as white text on green background.</p>
+
+</body>
+</html>

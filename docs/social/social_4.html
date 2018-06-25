@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<body><style>h1,h2,p,pre,blockquote,a,img,figure,ul,li,form,input,body{border:0;margin:0;padding:0;outline:0}body{font:14px/22px arial}a{text-decoration:none;}</style>
+
+
+<style>#share a:hover{opacity:.7;transition:.1s linear}.facebook{background:#3D5B96 url("facebook.png") no-repeat scroll 50% 25% / 20px;color:#fff;padding:1% 16.6666%}.twitter{background:#00ADE8 url("twitter.png") no-repeat scroll 50% 25% / 20px;color:#fff;padding:1% 16.6666%}.google{background:#DD3F34 url("google.png") no-repeat scroll 50% 25% / 20px;color:#fff;padding:1% 16.6666%}.facebook:hover,.twitter:hover,.google:hover{background-size:30px;padding:50px 16.6666% !important}</style>
+
+ <div id="share" style="width:100%;position:fixed;bottom:-3px"> <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(get_permalink($post->ID)); ?>&amp;t=<?php echo rawurlencode(strip_tags(get_the_title())) ?>" target="blank" rel="nofollow"></a> <a class="twitter" href="https://twitter.com/intent/tweet?text=<?php echo rawurlencode(strip_tags(get_the_title())) ?>: <?php echo urlencode(get_permalink($post->ID)); ?>" target="blank" rel="nofollow"></a> <a class="google" href="https://plusone.google.com/_/+1/confirm?hl=de&amp;url=<?php echo urlencode(get_permalink($post->ID)); ?>&amp;title=<?php echo rawurlencode(strip_tags(get_the_title())) ?>" target="blank" rel="nofollow"></a> </div>
+
+
+</body>
+</html>

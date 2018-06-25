@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<body><style>h1,h2,p,pre,blockquote,a,img,figure,ul,li,form,input,body{border:0;margin:0;padding:0;outline:0}body{font:14px/22px arial}a{text-decoration:none;}</style>
+
+
+<style>.social{position:fixed;top:25%}.social li{list-style:none;padding:0;margin:0}.social li a{display:block;padding:30px}.social li a:hover{transition:.1s linear;opacity:.8}.social li a.facebook{background:#3D5B96 url("facebook.png") no-repeat scroll 45%}.social li a.twitter{background:#00ADE8 url("twitter.png") no-repeat scroll 45%}.social li a.google{background:#DD3F34 url("google.png") no-repeat scroll 45%}</style>
+
+<ul class="social"> <li><a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(get_permalink($post->ID)); ?>&amp;t=<?php echo rawurlencode(strip_tags(get_the_title())) ?>" target="blank" rel="nofollow"></a></li> <li><a class="twitter" href="https://twitter.com/intent/tweet?text=<?php echo rawurlencode(strip_tags(get_the_title())) ?>: <?php echo urlencode(get_permalink($post->ID)); ?>" target="blank" rel="nofollow"></a></li> <li><a class="google" href="https://plusone.google.com/_/+1/confirm?hl=de&url=<?php echo urlencode(get_permalink($post->ID)); ?>&title=<?php echo rawurlencode(strip_tags(get_the_title())) ?>" target="blank" rel="nofollow"></a></li> </ul>
+
+
+</body>
+</html>

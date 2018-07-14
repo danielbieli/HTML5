@@ -1,6 +1,8 @@
 # HTML5
 
-## Minimal Valid HTML5 Markup
+## HTML Templates
+
+### Minimal Valid HTML5 Markup
 
 ```html  
 <!doctype html>
@@ -9,6 +11,23 @@
         <meta charset="utf-8">
         <title>Minimal Valid HTML5</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+    </body>
+</html>
+```
+
+### Meta Refresh - HTML Weiterleitung
+
+```html
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8">
+		<meta name="robots" content="noindex, follow">
+        <title>Meta Refresh</title>
+		<meta http-equiv="refresh" content="0; URL=https://danielbieli.tk">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">	
     </head>
     <body>
     </body>

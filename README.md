@@ -34,6 +34,41 @@
 </html>
 ```
 
+## TXT Konfigurationsdatein
+
+### robots.txt
+
+Der einfachste Aufbau der robots.txt sieht folgendermaßen aus:
+
+```txt
+User-agent: * 
+Disallow:
+```
+
+Dieser Code bewirkt, dass der Googlebot alle Seiten crawlen darf. Um dem Bot das Crawlen der kompletten Webpräsenz zu verbieten, solltest Du folgende Angabe in Deine robots.txt Datei schreiben:
+
+```txt
+User-agent: * 
+Disallow: /
+```
+
+Beispiel: Möchtest Du, dass Dein Verzeichnis /info/ nicht vom Googlebot gecrawled wird, dann gib folgenden Befehl in der robots.txt Datei an:
+
+```txt
+User-agent: Googlebot 
+Disallow: /info/
+```
+
+### humans.txt
+
+Die Datei robots.txt stellt "Robotern" (in Form von Software/Webcrawler) zusätzliche Informationen über eine Webseite zur Verfügung. In Anlehnung hieran hat Google 2011 die Datei humans.txt eingeführt, die menschlichen Besuchern der Webseite zusätzliche Hintergrundinformationen bieten soll.Diese Datei wird seitdem auch von anderen Webseiten verwendet, um z. B. die Programmierer der Webseite namentlich zu nennen oder die eingesetzte Software zu beschreiben. Google selbst nutzt die Datei für eine kurze Selbstdarstellung und Verweise auf Arbeitsplätze im Unternehmen.
+
+- https://www.google.com/humans.txt
+
+```txt
+Google is built by a large team of engineers, designers, researchers, robots, and others in many different sites across the globe. It is updated continuously, and built with more tools and technologies than we can shake a stick at. If you'd like to help us out, see google.com/careers.
+```
+
 ## `<head></head>`
 
 ### Meta Tags

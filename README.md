@@ -68,6 +68,20 @@ Inhaltlich gute Seite mit nur externen Links. Wenn `nofollow` im Head angegeben 
 
 Eine Login Seite zum Beispiel. Weder soll diese indexiert werden noch soll der Robot unser Crawl Guthaben verschwenden mit nicht öffentlichen Links.
 
+#### [GEO Meta Tag](http://www.geo-tag.de/informator/de1.html)
+
+Geo-Tags sind HTML-Meta-Tags, die eine Aussage über die geografische Lokation einer Webseite oder der ganzen Site machen. 
+
+* [GEO Meta Tag Validator](http://www.geo-tag.de/validator/de.php)
+* [GEO Meta Tag Generator](http://www.geo-tag.de/generator/de.html)
+
+```html
+<meta name="geo.region" content="CH-SO" />
+<meta name="geo.placename" content="Solothurn" />
+<meta name="geo.position" content="46.81819;8.22751" />
+<meta name="ICBM" content="46.81819, 8.22751" />
+```
+
 ### Skripte
 
 #### JavaScript
